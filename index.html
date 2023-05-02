@@ -1,78 +1,424 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Wandering Henry's Big and Small Steps</title>
-    <style>
-      /* Add some basic styles */
-      body {
-        font-family: Arial, sans-serif;
-        line-height: 1.5;
-        margin: 1;
-        padding: 0;
+<head>
+  <title>My Slideshow</title>
+  <style>
+    body {
+      background-color: #efede8;
+      color: #333333;
+      font-family: Arial, sans-serif;
+    }
+    .slideshow-container {
+      max-width: 500px;
+      position: relative;
+      margin: auto;
+      padding-bottom: 30px;
+      /* background-color: antiquewhite; */
+      /* background-color: rgba(255,255,255,0.8); */
+      background-color: #f5deb3;
+      border: 10px double #333333;
+      /* border: 10px solid #f5deb3; */
       }
-      h1 {
-        font-size: 2em;
-        margin: 0.5em 0;
-      }
-      h2 {
-        font-size: 1.5em;
-        margin: 1em 0 0.5em;
-      }
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-      }
-      .has-sub-text {
-        margin-bottom: 0;
-        line-height: 1.2;
-      }
-      .image-desc {
-        font-style: italic;
-        text-align: left;
-        font-size: 0.8em;
-      }
-      .sub-text {
-        margin-top: 0;
-        line-height: 1;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1 class="has-sub-text">Wandering Henry's Big and Small Steps</h1>
-      <p class="sub-text">The Travel Diaries</p>
-    </header>
-    <main>
-      <article>
-        <h2>Arrive in Brisbane - February 5th, 2023</h2>
-        <p>Paris is a beautiful city with so much history and culture. I spent a week there exploring all the famous landmarks, including the Eiffel Tower, the Louvre, and Notre-Dame Cathedral.</p>
-        <figure>
-          <img src="paris1.jpg" alt="Eiffel Tower">
-          <figcaption class="image-desc">The Eiffel Tower at sunset</figcaption>
-        </figure>
-        <p>One of the highlights of my trip was watching the sunset from the top of the Eiffel Tower. The view was absolutely breathtaking!</p>
-        <figure>
-          <img src="paris2.jpg" alt="Louvre Museum">
-          <figcaption class="image-desc">The Louvre Museum</figcaption>
-        </figure>
-        <p>I also spent a full day at the Louvre Museum, which houses some of the most famous works of art in the world, including the Mona Lisa.</p>
-      </article>
-      <article>
-        <h2>Tokyo, Japan - November 2022</h2>
-        <p>Tokyo is a bustling metropolis with a unique blend of modern and traditional culture. During my visit, I experienced everything from traditional tea ceremonies to high-tech shopping malls.</p>
-        <figure>
-          <img src="tokyo1.jpg" alt="Tokyo Skytree">
-          <figcaption class="image-desc">The Tokyo Skytree</figcaption>
-        </figure>
-        <p>One of my favorite experiences was visiting the Tokyo Skytree, which is the tallest tower in the world. The view from the top was simply stunning!</p>
-        <figure>
-          <img src="tokyo2.jpg" alt="Shibuya Crossing">
-          <figcaption class="image-desc">Shibuya Crossing</figcaption>
-        </figure>
-        <p>I also visited Shibuya Crossing, which is one of the busiest intersections in the world. It was a surreal experience being surrounded by so many people!</p>
-      </article>
-    </main>
-  </body>
+    
+    .mySlides {
+      display: none;
+    }
+    
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      margin-top: -22px;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    
+    .prev:hover, .next:hover {
+      /* background-color: rgba(0,0,0,0.8); */
+      background-color: #4682b4;
+    }
+    
+    .location {
+      color: #f2f2f2;
+      /* color: #ffffff; */
+      font-size: 15px;
+      padding: 8px 12px;
+      position: absolute;
+      /* bottom: 8px; */
+      top: 0px;
+      left:0;
+      width: 100%;
+      text-align: left;
+      /* background-color: #5f9ea0;
+      opacity: 0.8; */
+    }
+    
+    .numbertext {
+      color: #f2f2f2;
+      /* color: #ffffff; */
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+    
+    img {
+      max-width: 100%;
+      /* max-height: 200px; */
+      height: auto;
+      display: block;
+      margin: auto;
+      /* border: 10px solid #f5deb3; */
+      /* box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75); */
+    }
+
+    .caption {
+      color:#f2f2f2;
+      /* color: #ffffff; */
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 14px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 10;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 100%;
+      text-align: left;
+      /* background-color: rgba(0,0,0,0.8); */
+      background-color: #6f6f6f;
+      box-sizing: border-box;
+    }
+
+    .event-header {
+      padding: 0;
+      font-size: 28px;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 0px;
+    } 
+    
+    .date {
+      padding: 0;
+      margin-top: 0px;
+      /* font-family: 'Times New Roman', Times, serif;  */
+      margin-left: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+
+<article>
+
+  <div class="event-container" id="flatrock">
+    <h2 class="event-header">Flat Rock Camping</h2>
+    <h5 class="date"> March 17th - 19th </h5>
+      <p> Located about 45 minutes south of Byron Bay in NSW, this was the first camping trip I took part of with
+        the UQ Surfers Club. The swell that weekend wasn't impressive, however that was all made up for on the final
+        morning when a pod of a dozen dolphins joined us in the water, showcasing their wave-riding abilities to our admiration.
+        Aside from many hours of wave-chasing we took a drive up to a lake near Lennox Heads, watched a movie under the stars,
+        ate around the campfire and got some over-priced pub feed nearby.
+      </p>
+      <div class="slideshow-container" id="slideshow1">
+  
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-18-23 sunrise.JPG" style="width:100%">
+          <div class="caption">March 18th: My first ocean sunrise.</div>
+        </div>
+
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-18-23 volleyball.JPG" style="width:100%">
+          <div class="caption">March 18th: Playing volleyball at Ainsworth Lake in Lennox.</div>
+        </div>
+      
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-18-23 boulders cliff.JPG" style="width:100%">
+          <div class="caption">March 18th: Me on a cliff overlooking Boulders Beach after the lake.</div>
+        </div>
+  
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-18-23 iron peg bay.JPG" style="width:100%">
+          <div class="caption">March 18th: A bay just south of Boulders Beach. </div>
+        </div>
+
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-18-23 campsite beers.JPG" style="width:100%">
+          <div class="caption">March 18th: Hanging out before going to the pub.</div>
+        </div>
+
+        <div class="mySlides">
+          <img src="media/Flat Rock/frog.JPG" style="width:100%">
+          <div class="caption">March 17th: Frog.</div>
+        </div>
+
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-19-23 bush turkeys.JPG" style="width:100%">
+          <div class="caption">March 19th: Early morning bush turkeys eating some Sour Patch Kids left out.</div>
+        </div>
+        
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-19-23 sunrise  sharps beach.JPG" style="width:100%">
+          <div class="caption">March 19th: 6:45am sunrise at Sharps Beach, on the north side of Flat Rock.</div>
+        </div>
+  
+        <div class="mySlides">
+          <img src="media/Flat Rock/03-19-23 campsite.JPG" style="width:100%">
+          <div class="caption">March 19th: The campsite before packing up.</div>
+        </div>
+  
+        <a class="prev" onclick="plusSlides(-1, 'slideshow1')">❮</a>
+        <a class="next" onclick="plusSlides(1, 'slideshow1')">❯</a>
+      </div>
+  </div>
+
+  <div class="event-container" id="agnes">
+     <h2 class="event-header">Agnes Rock</h2>
+      <h5 class="date">April 12th - April 16th</h5>
+        <div class="slideshow-container" id="slideshow2">
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-12-23 beach soccer.JPG" style="width:100%">
+            <div class="caption">April 12th: Playing soccer on Main Beach after a 6.5 hour car ride.</div>
+          </div>
+        
+          <div class="mySlides">
+            <img src="media/Agnes/04-12-23 sunset.jpg" st
+        yle="width:100%">
+            <div class="caption">April 12th: Pretty pretty sunset. </div>
+          </div>
+          <div class="mySlides">
+            <img src="media/Agnes/04-13-23 dawn partrol.jpg" style="width:100%">
+            <div class="caption">April 13th: Loading up the boards for dawn patrol surf search.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-13-23 hostel.jpg" style="width:100%">
+            <div class="caption">April 13th: Relaxing at the hostel.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-14-23 red rock walk (2).JPG" style="width:100%">
+            <div class="caption">April 14th: What a handsome boy - Red Rock Trail.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-14-23 red rock walk group.JPG" style="width:100%">
+            <div class="caption">April 14th: Making our own waves on a swell-less trip.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-14-23 red rock walk Jesse.JPG" style="width:100%">
+            <div class="caption">April 14th: Jesse and I. Very handsome boys.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-14-23 red rock walk.JPG" style="width:100%">
+            <div class="caption">April 14th: Red Rock Trail, looking at Springs Beach.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-14-23 sunrise group.jpg" style="width:100%">
+            <div class="caption">April 14th: Up for sunrise on Main Beach.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-14-23 sunrise.jpg" style="width:100%">
+            <div class="caption">April 14th: Early morning swim.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-15-23 beach dinner.JPG" style="width:100%">
+            <div class="caption">April 15th: Group dinner at a secret beach in 1770.</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-15-23 paper forest (2).JPG" style="width:100%">
+            <div class="caption"></div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-15-23 paper forest.JPG" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-16-23 sunrise rocks.JPG" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+  
+          <div class="mySlides">
+            <img src="media/Agnes/04-16-23 sunrise.JPG" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+  
+          <a class="prev" onclick="plusSlides(-1, 'slideshow2')">❮</a>
+          <a class="next" onclick="plusSlides(1, 'slideshow2')">❯</a>
+        </div>
+  </div>
+
+  <div class="event-container" id="coochie">
+    <h2 class="event-header">Coochiemuldo Island</h2>
+      <h5 class="date">April 24th</h5>
+        <div class="slideshow-container" id="slideshow3">
+  
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 daniel henry lean.JPG" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+        
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 the girls picnic.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+        
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 chicken lina (2).jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 chicken alena.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 walking.JPG" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 beach path.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 on a log.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 on a log magestic.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 cool log.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 ferry daniel.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="media/Coochiemuldo/04-25-23 monopoly deal.jpg" style="width:100%">
+            <div class="caption">Additional Text</div>
+          </div>
+
+          <a class="prev" onclick="plusSlides(-1, 'slideshow3')">❮</a>
+          <a class="next" onclick="plusSlides(1, 'slideshow3')">❯</a>
+        </div>
+  </div>
+
+  <div class="event-container" id="byron">
+    <h2 class="event-header">Byron Bay</h2>
+    <h5 class="date"> February 27th - March 1st </h5>
+    <p> </p>
+    <div class="slideshow-container" id="slideshow4">
+
+      <div class="mySlides">
+        <img src="media/Byron Bay/02-28-23 byron-marco-board.JPG" style="width:100%">
+        <div class="caption">February 28th: Marco and I spending the day at White's Beach, a small secluded beach.</div>
+      </div>
+    
+      <div class="mySlides">
+        <img src="media/Byron Bay/02-28-23 byron-whites-beach.JPG" style="width:100%">
+        <div class="caption">Additional Text</div>
+      </div>
+    
+      <div class="mySlides">
+        <img src="media/Byron Bay/03-01-23 byron-bbq.JPG" style="width:100%">
+        <div class="caption">Additional Text</div>
+      </div>
+
+      <div class="mySlides">
+        <img src="media/Byron Bay/03-01-23 byron-lighthouse.JPG" style="width:100%">
+        <div class="caption">Additional Text</div>
+      </div>
+
+      <div class="mySlides">
+        <img src="media/Byron Bay/03-01-23 byron-lookout-owen-rob.JPG" style="width:100%">
+        <div class="caption">Additional Text</div>
+      </div>
+
+      <div class="mySlides">
+        <img src="media/Byron Bay/03-01-23 byron-lookout-film.JPG" style="width:100%">
+        <div class="caption">Additional Text</div>
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1, 'slideshow4')">❮</a>
+      <a class="next" onclick="plusSlides(1, 'slideshow4')">❯</a>
+    </div>
+  </div>
+
+</article>
+
+<script>
+var sizetemplate = document.getElementById('slideshow1').getElementsByClassName("mySlides")[1].getElementsByTagName("img")[0];
+
+var slideIndex = { slideshow1: 1, slideshow2: 1, slideshow3: 1, slideshow4: 1};
+showSlides(slideIndex.slideshow1, 'slideshow1');
+showSlides(slideIndex.slideshow2, 'slideshow2');
+showSlides(slideIndex.slideshow3, 'slideshow3');
+showSlides(slideIndex.slideshow4, 'slideshow4');
+
+
+function plusSlides(n, slideshowId) {
+  showSlides(slideIndex[slideshowId] += n, slideshowId);
+}
+
+function currentSlide(n, slideshowId) {
+  showSlides(slideIndex[slideshowId] = n, slideshowId);
+}
+
+function showSlides(n, slideshowId) {
+  var i;
+  var slides = document.getElementById(slideshowId).getElementsByClassName("mySlides");
+  if (n > slides.length) {slideIndex[slideshowId] = 1}
+  if (n < 1) {slideIndex[slideshowId] = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  slides[slideIndex[slideshowId]-1].style.display = "block";
+
+  var img = slides[slideIndex[slideshowId]-1].getElementsByTagName("img")[0];
+  if (img.naturalWidth > img.naturalHeight) {
+    var size = img.naturalHeight/img.naturalWidth * 100;
+    img.style.maxWidth = "100%";
+    img.style.maxHeight = `${size}%`;
+
+  } else {
+    var size = img.naturalWidth/img.naturalHeight * 100;
+    img.style.maxHeight = "100%";
+    img.style.maxWidth = `${img.naturalWidth/sizetemplate.naturalWidth * 100 * 2000/img.naturalHeight}%`;
+  }
+
+}
+</script>
+
+</body>
 </html>
